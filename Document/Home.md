@@ -6,6 +6,7 @@
 | --- | --- |
 | 문서 배치·링크·갱신 규칙 | [문서 운영](00-meta/index.md) |
 | 프로젝트 개요·Unreal 모듈·설정 | [아키텍처](10-architecture/index.md) |
+| 확정된 게임 기획(미구현) | [게임 기획](30-design/index.md) |
 | 채택한 설계, 대안, 제약 | [설계 결정](20-decisions/index.md) |
 | 프로젝트 열기, 실행·검증 절차 | [가이드](40-guides/index.md) |
 | 확인된 상태와 이어받을 맥락 | [작업 기록과 인수인계](50-worklog/index.md) |
