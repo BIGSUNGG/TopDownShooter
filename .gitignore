@@ -12,3 +12,4 @@ Client/*.VC.db
 
 # Pi harness state
 .pi-glla/
+.crew
