@@ -1,0 +1,14 @@
+# UE generated output
+Client/Binaries/
+Client/Build/
+Client/DerivedDataCache/
+Client/Intermediate/
+Client/Saved/
+Client/.vs/
+Client/*.sln
+Client/*.slnx
+Client/*.suo
+Client/*.VC.db
+
+# Pi harness state
+.pi-glla/
