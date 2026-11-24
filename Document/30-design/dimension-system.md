@@ -19,4 +19,10 @@
 
 - 전환 직후 플레이어가 새 차원의 벽이나 오브젝트와 같은 위치에 놓이면 전환하지 않는다. 실패를 알리는 피드백만 표시하고, 플레이어는 위치를 옮겨 다시 시도한다.
 
+## 구현 현황
+
+순환 순서(A→B→C→A)와 공통 오브젝트 전환은 `UDimensionSubsystem`에 구현돼 있다(Q/E 2초 홀드는 데모 컨트롤러, 태그 규약은 `Dimension/` 모듈). 전환 실패 처리(겹침 검사·피드백)는 아직 없고, 데모 레벨은 차원 전용 벽을 통로에만 두어 겹칠 확률을 낮췄다. 한계는 [ADR-0002](../20-decisions/ADR-0002-dimension-level-authoring.md)에 적었다.
+
+근거 경로: `Client/Source/Client/Dimension/DimensionSubsystem.cpp`, `Client/Source/Client/Dimension/DimensionTypes.h`
+
 [상위: 게임 기획](index.md)

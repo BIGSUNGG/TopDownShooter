@@ -7,6 +7,9 @@ public class Client : ModuleRules
 	public Client(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+		// Dimension/ 하위 헤더를 "Dimension/X.h" 형태로 포함하기 위해 모듈 루트를 include 경로에 추가한다.
+		PublicIncludePaths.Add(ModuleDirectory);
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 

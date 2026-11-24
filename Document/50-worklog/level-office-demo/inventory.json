@@ -1,0 +1,69 @@
+{
+  "ceiling_count": 0,
+  "player_start_count": 1,
+  "footprint": [
+    36.2,
+    36.2
+  ],
+  "is_partitioned": false,
+  "mesh_paths": [
+    "/Engine/BasicShapes/Cone.Cone",
+    "/Engine/BasicShapes/Cube.Cube",
+    "/Engine/BasicShapes/Cylinder.Cylinder",
+    "/Engine/BasicShapes/Plane.Plane"
+  ],
+  "dim_counts": {
+    "A": 6,
+    "B": 6,
+    "C": 5
+  },
+  "center_group_counts": {
+    "A": 1,
+    "B": 1,
+    "C": 1
+  },
+  "rooms": [
+    "Restroom",
+    "Lobby",
+    "Pantry",
+    "Corridor",
+    "OfficeA",
+    "OfficeB",
+    "CoreHall",
+    "ServerRoom",
+    "MeetingRoom"
+  ],
+  "checks": {
+    "rooms_ok": true,
+    "ceiling_count": 0,
+    "dim_counts": {
+      "A": 6,
+      "B": 6,
+      "C": 5
+    },
+    "center_group_counts": {
+      "A": 1,
+      "B": 1,
+      "C": 1
+    },
+    "player_start_count": 1,
+    "player_start_clearances": {
+      "A": true,
+      "B": true,
+      "C": true
+    },
+    "mesh_path_violations": 0,
+    "footprint_cm": {
+      "x": 3620,
+      "y": 3620
+    },
+    "footprint": [
+      36.2,
+      36.2
+    ],
+    "is_partitioned": false,
+    "generated_actor_count": 88
+  },
+  "ok": true,
+  "failed": []
+}

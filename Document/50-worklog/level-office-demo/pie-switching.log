@@ -1,0 +1,13 @@
+# PIE 차원 전환 기록 (UE 5.9, InputToolset로 Q/E 2.4초 홀드)
+# 원본: Client/Saved/Logs/Client.log 의 해당 라인을 그대로 옮겼다.
+[2026.11.24-04.55.47:189][162]LogDimension: switched to A: visible=6 hidden=11
+[2026.11.24-04.56.39:302][683]LogDimension: switched to B: visible=6 hidden=11
+[2026.11.24-04.57.11:152][915]LogDimension: switched to C: visible=5 hidden=12
+[2026.11.24-04.58.37:704][199]LogDimension: switched to A: visible=6 hidden=11
+[2026.11.24-04.59.24:495][733]LogDimension: switched to B: visible=6 hidden=11
+[2026.11.24-04.59.44:673][935]LogDimension: switched to C: visible=5 hidden=12
+# 2회차 세션: 홀드 취소 확인 (같은 세션에서 연속 측정)
+[2026.11.24-06.14.11:605][940]LogDimension: switched to A: visible=6 hidden=11
+# 06.14.20경 E를 0.6초만 눌렀다 놓음 -> 새 로그 라인 없음(전환 취소, 카운트 7 유지)
+[2026.11.24-06.14.49:717][976]LogDimension: switched to B: visible=6 hidden=11
+# 2.4초 홀드 -> 전환 발생(카운트 8)

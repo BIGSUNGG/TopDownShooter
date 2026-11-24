@@ -30,4 +30,10 @@
 - **조준**: 사격 정확도가 올라가고 이동 속도가 느려진다.
 - **장전**: 탄창과 예비 탄약을 함께 쓴다. 탄창을 비우면 R로 장전하고, 예비 탄약이 바닥나면 사격할 수 없다. 장전 중에는 사격할 수 없다.
 
+## 구현 현황
+
+이동(WASD)과 차원 전환 홀드(Q/E 2초)만 구현돼 있다. 사격·자세·회피·장전은 아직 코드가 없고, 차원 전환은 이 레벨 전용 데모 컨트롤러에 들어 있다.
+
+근거 경로: `Client/Source/Client/Dimension/DemoPawn.cpp`, `Client/Source/Client/Dimension/DemoPlayerController.cpp`
+
 [상위: 게임 기획](index.md)

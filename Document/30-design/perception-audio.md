@@ -15,4 +15,10 @@
 
 - 아이콘 모양·색·표시 시간과 실루엣 유지 시간은 정해지지 않았다. 밸런싱 단계에서 정한다.
 
+## 구현 현황
+
+시야 차폐와 소리 시각화는 코드가 없다. 지금 있는 것은 시야 원점이 될 데모 폰(카메라)과 [게임 개요](game-overview.md)의 규칙뿐이고, 차원 가시성(`DimensionSubsystem`)은 이 규칙과 별개다.
+
+근거 경로: `Client/Source/Client/Dimension/DemoPawn.cpp`, `Document/30-design/game-overview.md`
+
 [상위: 게임 기획](index.md)
