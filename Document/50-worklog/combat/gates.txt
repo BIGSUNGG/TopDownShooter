@@ -1,0 +1,33 @@
+# gates 2026-11-25 16:20->local
+
+$ node tools/pi/check_combat_docs.mjs
+combat-system.md matches config.json for 9 weapon states
+exit=0
+
+$ node --test tools/pi/
+✔ every note is reachable from Home.md (57.2845ms)
+✔ declared evidence paths exist in the repository (72.6685ms)
+✔ Obsidian can open Document/ without a plugin, and its local state stays uncommitted (1.0083ms)
+✔ AGENTS.md states the read, ownership, and hand-off rules (0.6261ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6481.7273
+
+$ git status --porcelain | wc -l
+20
+$ git status --porcelain Client/Config | wc -l
+0
+$ rg -c "USoundBase" Client/Source | wc -l
+2
+$ rg -c "SoundWave|SoundCue" Client/Source Client/Content | wc -l
+0
+
+$ git log --oneline -3
+bb0cc95 chore(config): set office demo default map and target shader model SM6
+6b27a77 feat(combat): add HUD widget blueprints and place dummies in the office demo
+5ae71d4 feat(combat): add GAS combat prototype with movement, weapon and HUD logic

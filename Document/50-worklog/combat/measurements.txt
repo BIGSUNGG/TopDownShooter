@@ -1,0 +1,11 @@
+# 크로스헤어 측정 (analyze3.py: 세로 홈대 런 묶음의 전체 span)
+
+07_crosshair_idle.png -> {'found': True, 'span': 23, 'x': 1027, 'y': 535, 'pieces': 5, 'runs': 10}
+08_crosshair_spread.png -> {'found': True, 'span': 23, 'x': 1027, 'y': 535, 'pieces': 5, 'runs': 10}
+
+# 적 체력 바 측정 (09/10: 창 캡처에서 붉은 가로 런)
+09_enemy_healthbar.png  health=80/100 -> x=848 width=40px
+10_enemy_healthbar_delayed.png health=60/100 -> x=848 width=40~41px
+
+# 로그 상관관계 (Client.log)
+gap=4.3 spread=0.50 / gap=6.0 spread=0.70 / gap=6.9 spread=0.81 / gap=8.0 spread=0.93 / gap=9.1 spread=1.06 / gap=11.5 spread=1.35

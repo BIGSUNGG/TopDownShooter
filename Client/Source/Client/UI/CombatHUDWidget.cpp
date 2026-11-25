@@ -21,6 +21,13 @@ void UCombatHUDWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
+	// 크로스헤어는 NativePaint 로 직접 그린다. Slate 는 무효화된 위젯만 다시 그리므로
+	// 이 위젯을 항상 다시 그리는(volatile) 위젯으로 둔다.
+	if (TSharedPtr<SWidget> SafeWidget = GetCachedWidget())
+	{
+		SafeWidget->ForceVolatile(true);
+	}
+
 	BindToPlayer();
 }
 
@@ -115,6 +122,17 @@ void UCombatHUDWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime
 	FVector2D CrosshairCursor = FVector2D::ZeroVector;
 	float CrosshairGap = 0.0f;
 	ComputeCrosshair(CrosshairCursor, CrosshairGap);
+
+	// Slate 는 무효화 요청이 있을 때만 NativePaint 를 다시 호출한다.
+	// 그래서 커서나 간격이 실제로 바뀌었을 때 직접 다시 그리라고 알린다.
+	const bool bCrosshairMoved = FVector2D::Distance(CrosshairCursor, LastPaintedCursor) > 0.5f;
+	if (bCrosshairMoved || FMath::Abs(CrosshairGap - LastPaintedGapPixels) > 0.25f || LastPaintedGapPixels < 0.0f)
+	{
+		LastPaintedCursor = CrosshairCursor;
+		LastPaintedGapPixels = CrosshairGap;
+		Invalidate(EInvalidateWidgetReason::Paint);
+	}
+
 	if (CrosshairLogCooldown <= 0.0f && FMath::Abs(CrosshairGap - LastLoggedGapPixels) >= 1.0f)
 	{
 		LastLoggedGapPixels = CrosshairGap;
@@ -138,10 +156,10 @@ void UCombatHUDWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime
 	RefreshText();
 }
 
-void UCombatHUDWidget::ComputeCrosshair(FVector2D& OutCursor, float& OutGap) const
+void UCombatHUDWidget::ComputeCrosshair(FVector2D& OutCursorViewportPx, float& OutGapViewportPx) const
 {
-	OutCursor = FVector2D::ZeroVector;
-	OutGap = 0.0f;
+	OutCursorViewportPx = FVector2D::ZeroVector;
+	OutGapViewportPx = 0.0f;
 
 	APlayerController* PlayerController = GetOwningPlayer();
 	if (!PlayerController)
@@ -153,11 +171,10 @@ void UCombatHUDWidget::ComputeCrosshair(FVector2D& OutCursor, float& OutGap) con
 	const float SpreadDeg = Character ? Character->GetCurrentSpreadDeg() : 0.0f;
 
 	const FVector2D ViewportSize = UWidgetLayoutLibrary::GetViewportSize(this);
-	const float ViewportScale = FMath::Max(UWidgetLayoutLibrary::GetViewportScale(this), KINDA_SMALL_NUMBER);
 	const float FovAngle = PlayerController->PlayerCameraManager ? PlayerController->PlayerCameraManager->GetFOVAngle() : 90.0f;
 
-	// 간격은 화면상 각도에 해당하므로 뷰포트 픽셀로 바꾼 뒤 위젯 로컬 단위로 환산한다.
-	OutGap = CombatMath::CrosshairGapPixels(SpreadDeg, ViewportSize.X * 0.5f, FovAngle * 0.5f) / ViewportScale;
+	// 간격은 화면상 각도에 해당하므로 뷰포트 픽셀 단위로 바꾼다. 위젯 로컬 단위 환산은 NativePaint 가 기하로 한다.
+	OutGapViewportPx = CombatMath::CrosshairGapPixels(SpreadDeg, ViewportSize.X * 0.5f, FovAngle * 0.5f);
 
 	// 커서가 뷰포트 밖에 있으면 화면 중앙에 둔다(조준점은 항상 보여야 한다).
 	FVector2D CursorPixels = ViewportSize * 0.5f;
@@ -168,7 +185,7 @@ void UCombatHUDWidget::ComputeCrosshair(FVector2D& OutCursor, float& OutGap) con
 		CursorPixels = FVector2D(CursorX, CursorY);
 	}
 
-	OutCursor = CursorPixels / ViewportScale;
+	OutCursorViewportPx = CursorPixels;
 }
 
 int32 UCombatHUDWidget::NativePaint(const FPaintArgs& Args, const FGeometry& AllottedGeometry, const FSlateRect& MyCullingRect,
@@ -177,9 +194,32 @@ int32 UCombatHUDWidget::NativePaint(const FPaintArgs& Args, const FGeometry& All
 	const int32 PaintedLayer = Super::NativePaint(
 		Args, AllottedGeometry, MyCullingRect, OutDrawElements, LayerId, InWidgetStyle, bParentEnabled);
 
-	FVector2D CursorPos = FVector2D::ZeroVector;
-	float Gap = 0.0f;
-	ComputeCrosshair(CursorPos, Gap);
+	FVector2D CursorViewportPx = FVector2D::ZeroVector;
+	float GapViewportPx = 0.0f;
+	ComputeCrosshair(CursorViewportPx, GapViewportPx);
+
+	// 뷰포트 픽셀 -> 위젯 로컬 단위. 위젯 크기와 뷰포트 크기가 다를 수 있어(레터박스, DPI) 실제 기하로 환산한다.
+	const FVector2D LocalSize = AllottedGeometry.GetLocalSize();
+	const FVector2D ViewportSize = UWidgetLayoutLibrary::GetViewportSize(this);
+	const double LocalPerPx = (ViewportSize.X > 0.0) ? LocalSize.X / ViewportSize.X : 1.0;
+	const float PixelScale = static_cast<float>(LocalPerPx);
+
+	FVector2D CursorPos = CursorViewportPx * LocalPerPx;
+	const float Gap = GapViewportPx * PixelScale;
+
+	// 뷰포트를 벗어난 커서는 화면 중앙으로 되돌린다.
+	if (CursorPos.X < 0.0 || CursorPos.Y < 0.0 || CursorPos.X > LocalSize.X || CursorPos.Y > LocalSize.Y)
+	{
+		CursorPos = LocalSize * 0.5;
+	}
+
+	// 진단용: 실제로 그리는 값과 호출 빈도를 남긴다(1초에 한 번).
+	if (++PaintLogCounter % 60 == 0)
+	{
+		const ACombatCharacter* PaintCharacter = BoundCharacter.Get();
+		UE_LOG(LogCombat, Log, TEXT("COMBAT_CROSSHAIR_PAINT gap=%.1f spread=%.2f cursor=%.0f,%.0f scale=%.2f"),
+			Gap, PaintCharacter ? PaintCharacter->GetCurrentSpreadDeg() : 0.0f, CursorPos.X, CursorPos.Y, PixelScale);
+	}
 	if (Gap <= 0.0f && CursorPos.IsNearlyZero())
 	{
 		return PaintedLayer;
@@ -191,11 +231,12 @@ int32 UCombatHUDWidget::NativePaint(const FPaintArgs& Args, const FGeometry& All
 		return PaintedLayer;
 	}
 
-	// 십자 조준점: 중앙 점 + 위/아래/좌/우 홈대(간격은 탄퍼짐에 비례).
-	const FLinearColor Color(0.55f, 1.0f, 1.0f, 0.95f);
-	const FVector2D DotSize(3.0f, 3.0f);
-	const FVector2f ArmLength(1.0f, 10.0f);
-	const FVector2f ArmThickness(1.0f, 1.0f);
+	// 십자 조준점: 중앙 점 + 위/아래/좌/우 홈대. 두께는 화면 픽셀 기준이라 배율이 달라도 또렷하게 보인다.
+	const FLinearColor& Color = CrosshairColor;
+	const float DotScaled = CrosshairDotPixels * PixelScale;
+	const float ArmLengthScaled = CrosshairArmLengthPixels * PixelScale;
+	const float ArmThicknessScaled = CrosshairArmThicknessPixels * PixelScale;
+	const FVector2D DotSize(DotScaled, DotScaled);
 
 	auto DrawBlock = [&](const FVector2D& InCenter, const FVector2f& InSize)
 	{
@@ -213,12 +254,14 @@ int32 UCombatHUDWidget::NativePaint(const FPaintArgs& Args, const FGeometry& All
 
 	for (int32 Axis = 0; Axis < 2; ++Axis)
 	{
-		const FVector2f Size = (Axis == 0) ? FVector2f(ArmThickness.X, ArmLength.Y) : FVector2f(ArmLength.Y, ArmThickness.Y);
+		const FVector2f Size = (Axis == 0)
+			? FVector2f(ArmThicknessScaled, ArmLengthScaled)
+			: FVector2f(ArmLengthScaled, ArmThicknessScaled);
 		for (int32 Direction = -1; Direction <= 1; Direction += 2)
 		{
 			const FVector2D Offset = (Axis == 0)
-				? FVector2D(0.0, Direction * (Gap + ArmLength.Y * 0.5f))
-				: FVector2D(Direction * (Gap + ArmLength.Y * 0.5f), 0.0);
+				? FVector2D(0.0, Direction * (Gap + ArmLengthScaled * 0.5f))
+				: FVector2D(Direction * (Gap + ArmLengthScaled * 0.5f), 0.0);
 
 			DrawBlock(CursorPos + Offset, Size);
 		}

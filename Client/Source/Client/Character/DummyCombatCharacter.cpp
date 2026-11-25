@@ -23,7 +23,7 @@ ADummyCombatCharacter::ADummyCombatCharacter()
 		MovementComponent->bRunPhysicsWithNoController = false;
 	}
 
-	// 머리 위 HP 바. 화면 공간 위젯이라 항상 카메라를 향하고 거리와 무관하게 같은 크기로 보인다.
+	// 머리 위 HP 바. 화면 공간 위젯이라 항상 카메라를 향하고 거리와 무관하게 같은 크기로 읽힌다.
 	OverheadHealthBar = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverheadHealthBar"));
 	OverheadHealthBar->SetupAttachment(GetCapsuleComponent());
 	OverheadHealthBar->SetWidgetSpace(EWidgetSpace::Screen);

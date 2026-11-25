@@ -34,6 +34,22 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat|HUD")
 	TSubclassOf<UDamageNumberWidget> DamageNumberWidgetClass;
 
+	/** 크로스헤어 중앙 점 크기(화면 픽셀). */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat|HUD")
+	float CrosshairDotPixels = 6.0f;
+
+	/** 크로스헤어 홈대 길이(화면 픽셀). */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat|HUD")
+	float CrosshairArmLengthPixels = 22.0f;
+
+	/** 크로스헤어 홈대 두께(화면 픽셀). */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat|HUD")
+	float CrosshairArmThicknessPixels = 4.0f;
+
+	/** 크로스헤어 색. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat|HUD")
+	FLinearColor CrosshairColor = FLinearColor(0.35f, 1.0f, 1.0f, 1.0f);
+
 protected:
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
@@ -79,8 +95,8 @@ private:
 	/** 맞은 월드 위치에 피해 숫자를 띄운다. */
 	void SpawnDamageNumber(float Damage, const FVector& WorldLocation);
 
-	/** 커서 위치(위젯 로컬 좌표)와 현재 탄퍼짐의 십자 간격(px)을 계산한다. */
-	void ComputeCrosshair(FVector2D& OutCursor, float& OutGap) const;
+	/** 커서 위치(위젯 로컬 좌표), 현재 탄퍼짐의 십자 간격(px), 화면 1픽셀에 해당하는 로컬 크기를 계산한다. */
+	void ComputeCrosshair(FVector2D& OutCursorViewportPx, float& OutGapViewportPx) const;
 
 	TWeakObjectPtr<ACombatCharacter> BoundCharacter;
 
@@ -92,6 +108,13 @@ private:
 
 	/** 마지막으로 기록한 크로스헤어 간격(px). */
 	float LastLoggedGapPixels = -1.0f;
+
+	/** NativePaint 호출 횟수(진단 로그 스로틀용). */
+	mutable int32 PaintLogCounter = 0;
+
+	/** 마지막으로 그린 크로스헤어 상태. Slate 는 다시 그리라고 할 때만 NativePaint 를 호출한다. */
+	float LastPaintedGapPixels = -1.0f;
+	FVector2D LastPaintedCursor = FVector2D(-1.0f, -1.0f);
 
 	/** 피격 플래시 남은 시간. */
 	float FlashRemainingSeconds = 0.0f;

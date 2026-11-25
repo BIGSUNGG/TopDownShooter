@@ -1,0 +1,81 @@
+# PIE 실행 로그에서 뽑은 크로스헤어·적 체력 바·전투 증거 (원본: Client/Saved/Logs/Client-backup-2026.11.25-04.38.32.log)
+LogDimension: switched to A: visible=6 hidden=11
+LogCombat: COMBAT_CROSSHAIR gap=9.2 spread=0.50
+LogCombat: COMBAT_CROSSHAIR gap=3.2 spread=0.18
+LogCombat: COMBAT_CROSSHAIR gap=9.2 spread=0.50
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=11/60 spreadDeg=0.50 muzzleDir=V(X=0.01, Y=1.00, Z=-0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=80.0
+LogCombat: COMBAT_ENEMY_HEALTHBAR_SHOW target=DummyCombatCharacter_0 health=80.0/100.0
+LogCombat: COMBAT_CROSSHAIR gap=11.3 spread=0.61
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=10/60 spreadDeg=0.53 muzzleDir=V(X=0.02, Y=1.00, Z=-0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=60.0
+LogCombat: COMBAT_CROSSHAIR gap=10.3 spread=0.56
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=9/60 spreadDeg=0.54 muzzleDir=V(X=0.00, Y=1.00, Z=0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=40.0
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=8/60 spreadDeg=0.55 muzzleDir=V(X=-0.02, Y=1.00, Z=0.00)
+LogCombat: COMBAT_CROSSHAIR gap=13.0 spread=0.71
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=20.0
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=7/60 spreadDeg=0.54 muzzleDir=V(X=-0.03, Y=1.00, Z=-0.01)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=0.0
+LogCombat: COMBAT_DUMMY_DEATH dummy=DummyCombatCharacter_0
+LogCombat: COMBAT_DEATH pawn=DummyCombatCharacter_0 respawnInSeconds=3.0
+LogCombat: COMBAT_DUMMY_RESPAWN dummy=DummyCombatCharacter_0 health=100.0
+LogCombat: COMBAT_ENEMY_HEALTHBAR_HIDE target=DummyCombatCharacter_0 health=100.0/100.0
+LogCombat: COMBAT_CROSSHAIR gap=11.8 spread=0.64
+LogCombat: COMBAT_CROSSHAIR gap=9.5 spread=0.51
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=6/60 spreadDeg=0.51 muzzleDir=V(X=0.03, Y=1.00, Z=-0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=80.0
+LogCombat: COMBAT_ENEMY_HEALTHBAR_SHOW target=DummyCombatCharacter_0 health=80.0/100.0
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=5/60 spreadDeg=0.57 muzzleDir=V(X=0.03, Y=1.00, Z=-0.01)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=60.0
+LogCombat: COMBAT_CROSSHAIR gap=12.2 spread=0.66
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=4/60 spreadDeg=0.61 muzzleDir=V(X=0.03, Y=1.00, Z=0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=40.0
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=3/60 spreadDeg=0.64 muzzleDir=V(X=0.00, Y=1.00, Z=0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=20.0
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=2/60 spreadDeg=0.67 muzzleDir=V(X=-0.00, Y=1.00, Z=0.01)
+LogCombat: COMBAT_CROSSHAIR gap=15.5 spread=0.84
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=0.0
+LogCombat: COMBAT_DUMMY_DEATH dummy=DummyCombatCharacter_0
+LogCombat: COMBAT_DEATH pawn=DummyCombatCharacter_0 respawnInSeconds=3.0
+LogCombat: COMBAT_DUMMY_RESPAWN dummy=DummyCombatCharacter_0 health=100.0
+LogCombat: COMBAT_ENEMY_HEALTHBAR_HIDE target=DummyCombatCharacter_0 health=100.0/100.0
+LogCombat: COMBAT_CROSSHAIR gap=9.9 spread=0.54
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=1/60 spreadDeg=0.50 muzzleDir=V(X=0.00, Y=1.00, Z=0.00)
+LogCombat: COMBAT_CROSSHAIR gap=12.6 spread=0.68
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=80.0
+LogCombat: COMBAT_ENEMY_HEALTHBAR_SHOW target=DummyCombatCharacter_0 health=80.0/100.0
+LogCombat: COMBAT_CROSSHAIR gap=9.2 spread=0.50
+LogCombat: COMBAT_RELOAD_START pawn=PlayerCombatCharacter_0 ammo=1/60
+LogCombat: COMBAT_RELOAD pawn=PlayerCombatCharacter_0 moved=11 ammo=12/49
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=11/49 spreadDeg=0.50 muzzleDir=V(X=-0.00, Y=1.00, Z=0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=60.0
+LogCombat: COMBAT_CROSSHAIR gap=12.6 spread=0.68
+LogCombat: COMBAT_CROSSHAIR gap=9.6 spread=0.52
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=10/49 spreadDeg=0.50 muzzleDir=V(X=-0.00, Y=1.00, Z=0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=40.0
+LogCombat: COMBAT_CROSSHAIR gap=12.6 spread=0.68
+LogCombat: COMBAT_CROSSHAIR gap=9.6 spread=0.52
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=9/49 spreadDeg=0.50 muzzleDir=V(X=0.00, Y=1.00, Z=0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=20.0
+LogCombat: COMBAT_CROSSHAIR gap=12.6 spread=0.68
+LogCombat: COMBAT_CROSSHAIR gap=9.6 spread=0.52
+LogCombat: COMBAT_FIRE pawn=PlayerCombatCharacter_0 ammo=8/49 spreadDeg=0.50 muzzleDir=V(X=-0.00, Y=1.00, Z=0.00)
+LogCombat: COMBAT_HITSTOP dilation=0.15 seconds=0.06
+LogCombat: COMBAT_DAMAGE victim=DummyCombatCharacter_0 damage=20.0 health=0.0
+LogCombat: COMBAT_DUMMY_DEATH dummy=DummyCombatCharacter_0
+LogCombat: COMBAT_DEATH pawn=DummyCombatCharacter_0 respawnInSeconds=3.0
