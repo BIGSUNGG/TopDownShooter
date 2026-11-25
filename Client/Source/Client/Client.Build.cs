@@ -8,12 +8,14 @@ public class Client : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		// Dimension/ 하위 헤더를 "Dimension/X.h" 형태로 포함하기 위해 모듈 루트를 include 경로에 추가한다.
+		// Dimension/·Combat/·Character/ 하위 헤더를 "Dimension/X.h" 형태로 포함하기 위해 모듈 루트를 include 경로에 추가한다.
 		PublicIncludePaths.Add(ModuleDirectory);
-	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		// GameplayAbilitySystem: 체력 속성(AttributeSet), 피해·쿨다운(GameplayEffect), 사격·재장전(GameplayAbility).
+		// 공개 헤더(Combat/CombatAttributeSet.h, Character/CombatCharacter.h)가 GAS 헤더를 포함하므로 Public 에 둔다.
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayAbilities", "GameplayTasks", "GameplayTags" });
+
+		PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "Slate", "SlateCore" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
