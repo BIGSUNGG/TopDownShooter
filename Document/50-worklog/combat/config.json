@@ -1,0 +1,13 @@
+{
+  "states": [
+    {"state":"Stand_Idle","spread":{"baseDeg":0.5,"perShotDeg":0.2,"maxDeg":3.0},"muzzle":{"maxDeg":1.5,"speedDegPerSec":90.0}},
+    {"state":"Stand_Walk","spread":{"baseDeg":1.5,"perShotDeg":0.3,"maxDeg":5.0},"muzzle":{"maxDeg":6.0,"speedDegPerSec":60.0}},
+    {"state":"Stand_Run","spread":{"baseDeg":4.0,"perShotDeg":0.4,"maxDeg":8.0},"muzzle":{"maxDeg":12.0,"speedDegPerSec":35.0}},
+    {"state":"Stand_Aim","spread":{"baseDeg":0.1,"perShotDeg":0.15,"maxDeg":1.5},"muzzle":{"maxDeg":0.3,"speedDegPerSec":120.0}},
+    {"state":"Crouch_Idle","spread":{"baseDeg":0.3,"perShotDeg":0.15,"maxDeg":2.0},"muzzle":{"maxDeg":0.8,"speedDegPerSec":90.0}},
+    {"state":"Crouch_Walk","spread":{"baseDeg":1.0,"perShotDeg":0.25,"maxDeg":3.5},"muzzle":{"maxDeg":3.0,"speedDegPerSec":60.0}},
+    {"state":"Crouch_Aim","spread":{"baseDeg":0.05,"perShotDeg":0.1,"maxDeg":1.0},"muzzle":{"maxDeg":0.2,"speedDegPerSec":140.0}},
+    {"state":"Jump_Fall","spread":{"baseDeg":6.0,"perShotDeg":0.4,"maxDeg":10.0},"muzzle":{"maxDeg":8.0,"speedDegPerSec":45.0}},
+    {"state":"Roll","spread":{"baseDeg":0.0,"perShotDeg":0.0,"maxDeg":0.0},"muzzle":{"maxDeg":0.0,"speedDegPerSec":0.0}}
+  ]
+}

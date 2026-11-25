@@ -6,9 +6,20 @@
 2. Unreal Editor에서 `Client/Client.uproject`를 연다. 저장소 루트가 아니라 이 파일이 Unreal 프로젝트 진입점이다.
 3. 런타임 기능을 검증할 때는 변경한 기능의 빌드와 에디터 실행 결과를 직접 확인한다. 설정된 게임 기본 맵은 `/Engine/Maps/Templates/OpenWorld`다.
 
-위 절차는 프로젝트 파일을 근거로 정리했다. 이 문서 작업 범위에서는 Unreal 빌드·에디터 실행·게임 동작을 검증하지 않는다.
+위 절차는 프로젝트 파일을 근거로 정리했다. 빌드·자동 테스트 명령은 아래 절에서 실제 실행으로 확인했다.
 
 근거 경로: `Client/Client.uproject`, `Client/.vsconfig`, `Client/Config/DefaultEngine.ini`, `Client/Source/ClientEditor.Target.cs`
+
+## C++ 빌드와 전투 자동 테스트
+
+`Client/Build.bat`은 없다. 엔진 배치 파일을 직접 부른다.
+
+1. 에디터를 닫은 뒤 `"C:\Program Files\Epic Games\UE_5.9\Engine\Build\BatchFiles\Build.bat" ClientEditor Win64 Development -Project="<저장소>/Client/Client.uproject" -WaitMutex`를 실행하고 `Result: Succeeded`를 확인한다.
+2. 자동 테스트만 돌릴 때는 `UnrealEditor-Cmd.exe Client/Client.uproject -ExecCmds="Automation RunTests Client.Combat;Quit" -unattended -nopause -nosplash -nullrhi -log -abslog=<로그 경로>`를 쓴다. PIE 없이 돈다.
+3. `node tools/pi/check_combat_docs.mjs`로 [전투 시스템](../30-design/combat-system.md)의 확산·총구 벌어짐 표와 `Document/50-worklog/combat/config.json`이 일치하는지 확인한다. 이 JSON은 `Client.Combat.Tuning` 테스트가 덤프하므로 수치를 바꾸면 빌드 → 자동 테스트 → 검사기 순서로 다시 돌린다.
+4. PIE 증거는 `Document/50-worklog/combat/`에 모은다. 로그는 `Client/Saved/Logs/Client.log`의 `COMBAT_*`·`LogDimension: switched` 줄로 확인한다.
+
+근거 경로: `Client/Client.uproject`, `Client/Source/Client/Private/Tests/CombatAutomationTests.cpp`, `tools/pi/check_combat_docs.mjs`, `Document/50-worklog/combat/config.json`
 
 ## Pi에서 Unreal MCP 연결
 
